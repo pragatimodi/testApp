@@ -5,6 +5,11 @@ initializeApp({
     credential: applicationDefault(),
 });
 
+states = {
+    enabled: 'ENABLED',
+    disabled: 'DISABLED',
+}
+
 //TENANT CONFIG MANAGEMENT
 
 /* Request Tenant : Feel free to tweak these fields*/
@@ -12,11 +17,11 @@ initializeApp({
 const requestTenant = {
     displayName: "tenantTest",
     multiFactorConfig: {
-        state: 'ENABLED',
+        state: states.enabled,
         factorIds: ['phone'],
         providerConfigs: [
             {
-                state: 'ENABLED',
+                state: states.enabled,
                 totpProviderConfig: {
                     adjacentIntervals: 5,
                 },
@@ -25,6 +30,7 @@ const requestTenant = {
     },
 };
 */
+
 
 //Create Tenant
 /*
@@ -79,25 +85,29 @@ getAuth()
 /*
 const updatedProjectConfig = {
     multiFactorConfig: {
-        state: 'ENABLED',
-        enabledProviders: ['PHONE_SMS'],
+        state: states.enabled,
+        factorIds: ['phone'],
         providerConfigs: [
             {
-                state: 'DISABLED',
-                totpProviderConfig: {},
+                state: states.enabled,
+                totpProviderConfig: {
+                    adjacentIntervals: 5,
+                },
             },
         ]
     },
 };
 */
 
+
 //Update Project's config
 /*
-getAuth().projectConfigManager().updateProjectConfig({
-    updatedProjectConfig,
-}).then(
-    (updateProjectConfigResult) => {
-        console.log(JSON.stringify(updateProjectConfigResult));
-    }
-);
+getAuth()
+    .projectConfigManager()
+    .updateProjectConfig(updatedProjectConfig)
+    .then(
+        (updateProjectConfigResult) => {
+            console.log(JSON.stringify(updateProjectConfigResult));
+        }
+    );
 */
