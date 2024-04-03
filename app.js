@@ -13,7 +13,7 @@ initializeApp({
 // })
 
 // // b. Copy tenantId from the created tenant here
-const tenantId = 'passkeys-sample-s230z';
+// const tenantId = 'passkeys-sample-s230z';
 // /*  Tenant Request: Feel free to tweak these fields*/
 // const tenantRequest = {
 //     rpId: "tenant-id.firebase.app",
@@ -58,7 +58,7 @@ const tenantId = 'passkeys-sample-s230z';
 //     rpId: "project-id.firebase.app",
 //     expectedOrigins: ["example1.com", "app1"],
 // };
-
+//
 // getAuth()
 //     .passkeyConfigManager()
 //     .createPasskeyConfig(createPasskeyConfigRequest)
@@ -84,7 +84,7 @@ const tenantId = 'passkeys-sample-s230z';
 //     rpId: 'rpId',
 //     expectedOrigins: ['app1', 'app12'],
 // };
-
+//
 // getAuth()
 //     .passkeyConfigManager()
 //     .updatePasskeyConfig(updatedPasskeyConfig)
