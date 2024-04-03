@@ -6,9 +6,9 @@ initializeApp({
 });
 
 //TENANT CONFIG MANAGEMENT
-// 1. Create
+// // 1. Create
 // // a. create a tenant
-// getAuth().tenantManager().createTenant('passkeys-demo').then((createdTenant) => {
+// getAuth().tenantManager().createTenant({displayName: 'passkeys-demo'}).then((createdTenant) => {
 //     console.log(JSON.stringify(createdTenant.tenantId));
 // })
 
