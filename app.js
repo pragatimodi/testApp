@@ -38,17 +38,17 @@ const tenantId = 'passkeys-sample-s230z';
 //     );
 
 
-//3. Update Tenant
-const updateTenantRequest = {
-    expectedOrigins: undefined,
-};
-getAuth()
-    .passkeyConfigManager()
-    .updatePasskeyConfig(updateTenantRequest, tenantId)
-    .then(
-        (updatedConfig) =>
-            console.log(JSON.stringify(updatedConfig))
-    );
+// //3. Update Tenant
+// const updateTenantRequest = {
+//     expectedOrigins: undefined,
+// };
+// getAuth()
+//     .passkeyConfigManager()
+//     .updatePasskeyConfig(updateTenantRequest, tenantId)
+//     .then(
+//         (updatedConfig) =>
+//             console.log(JSON.stringify(updatedConfig))
+//     );
 
 
 //PROJECT CONFIG MANAGEMENT
@@ -93,3 +93,7 @@ getAuth()
 //             console.log(JSON.stringify(updateProjectConfigResult));
 //         }
 //     );
+
+
+// //7. Get user info
+// getAuth().getUser(<UID>).then((user) => console.log(JSON.stringify(user.passkeyInfo)));
