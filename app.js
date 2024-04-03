@@ -5,109 +5,91 @@ initializeApp({
     credential: applicationDefault(),
 });
 
-states = {
-    enabled: 'ENABLED',
-    disabled: 'DISABLED',
-}
-
 //TENANT CONFIG MANAGEMENT
+// 1. Create
+// // a. create a tenant
+// getAuth().tenantManager().createTenant('passkeys-demo').then((createdTenant) => {
+//     console.log(JSON.stringify(createdTenant.tenantId));
+// })
 
-/* Request Tenant : Feel free to tweak these fields*/
-/*
-const requestTenant = {
-    displayName: "tenantTest",
-    multiFactorConfig: {
-        state: states.enabled,
-        factorIds: ['phone'],
-        providerConfigs: [
-            {
-                state: states.enabled,
-                totpProviderConfig: {
-                    adjacentIntervals: 5,
-                },
-            },
-        ],
-    },
+// // b. Copy tenantId from the created tenant here
+const tenantId = 'passkeys-sample-s230z';
+// /*  Tenant Request: Feel free to tweak these fields*/
+// const tenantRequest = {
+//     rpId: "tenant-id.firebase.app",
+//     expectedOrigins: ["example1.com", "app1"],
+// };
+// // create passkey config for this tenant
+// getAuth()
+//     .passkeyConfigManager()
+//     .createPasskeyConfig(tenantRequest, tenantId)
+//     .then(
+//         (createdPasskeys) =>
+//             console.log(JSON.stringify(createdPasskeys))
+//     );
+
+// //2. Get Tenant
+// getAuth()
+//     .passkeyConfigManager()
+//     .getPasskeyConfig(tenantId)
+//     .then(
+//         (passkeyConfig) =>
+//             console.log(JSON.stringify(passkeyConfig))
+//     );
+
+
+//3. Update Tenant
+const updateTenantRequest = {
+    expectedOrigins: undefined,
 };
-*/
-
-
-//Create Tenant
-/*
 getAuth()
-    .tenantManager()
-    .createTenant(requestTenant)
-    .then(
-        (createdTenant) =>
-            console.log(JSON.stringify(createdTenant))
-    );
-*/
-
-//Update Tenant
-/*
-let tenant_id; //populate this field with "tenantId" obtained from createTenant() output
-getAuth()
-    .tenantManager()
-    .updateTenant(tenant_id, createTenantReq)
+    .passkeyConfigManager()
+    .updatePasskeyConfig(updateTenantRequest, tenantId)
     .then(
         (updatedConfig) =>
             console.log(JSON.stringify(updatedConfig))
     );
-*/
 
-//Get Tenant Config
-/*
-getAuth()
-    .tenantManager()
-    .getTenant(tenant_id)
-    .then(
-        (getTenantResult) => {
-            console.log(getTenantResult);
-        }
-    );
-*/
 
 //PROJECT CONFIG MANAGEMENT
 
-// Get Project Config
-/*
-getAuth()
-    .projectConfigManager()
-    .getProjectConfig()
-    .then(
-        (projectConfigResult) => {
-            console.log(JSON.stringify(projectConfigResult));
-        }
-    );
-*/
+// // 4. Create Passkey Config - cannot be reversed
+// const createPasskeyConfigRequest = {
+//     rpId: "project-id.firebase.app",
+//     expectedOrigins: ["example1.com", "app1"],
+// };
 
-/*Project Config update request - feel free to tweak these fields*/
-/*
-const updatedProjectConfig = {
-    multiFactorConfig: {
-        state: states.enabled,
-        factorIds: ['phone'],
-        providerConfigs: [
-            {
-                state: states.enabled,
-                totpProviderConfig: {
-                    adjacentIntervals: 5,
-                },
-            },
-        ]
-    },
-};
-*/
+// getAuth()
+//     .passkeyConfigManager()
+//     .createPasskeyConfig(createPasskeyConfigRequest)
+//     .then(
+//         (updateProjectConfigResult) => {
+//             console.log(JSON.stringify(updateProjectConfigResult));
+//         }
+//     );
 
+// // 5. Get Passkey Project Config
+// getAuth()
+//     .passkeyConfigManager()
+//     .getPasskeyConfig()
+//     .then(
+//         (projectConfigResult) => {
+//             console.log(JSON.stringify(projectConfigResult));
+//         }
+//     );
 
-//Update Project's config
-/*
-getAuth()
-    .projectConfigManager()
-    .updateProjectConfig(updatedProjectConfig)
-    .then(
-        (updateProjectConfigResult) => {
-            console.log(JSON.stringify(updateProjectConfigResult));
-        }
-    );
-*/
+// // 6. Update Project's config
+// //Project Config update request - feel free to tweak these fields
+// const updatedPasskeyConfig = {
+//     rpId: 'rpId',
+//     expectedOrigins: ['app1', 'app12'],
+// };
+
+// getAuth()
+//     .passkeyConfigManager()
+//     .updatePasskeyConfig(updatedPasskeyConfig)
+//     .then(
+//         (updateProjectConfigResult) => {
+//             console.log(JSON.stringify(updateProjectConfigResult));
+//         }
+//     );
