@@ -5,95 +5,90 @@ initializeApp({
     credential: applicationDefault(),
 });
 
-//TENANT CONFIG MANAGEMENT
-// // 1. Create
-// // a. create a tenant
-// getAuth().tenantManager().createTenant({displayName: 'passkeys-demo'}).then((createdTenant) => {
-//     console.log(JSON.stringify(createdTenant.tenantId));
-// })
-
-// // b. Copy tenantId from the created tenant here
-// const tenantId = 'passkeys-sample-s230z';
-// /*  Tenant Request: Feel free to tweak these fields*/
-// const tenantRequest = {
-//     rpId: "tenant-id.firebase.app",
-//     expectedOrigins: ["example1.com", "app1"],
-// };
-// // create passkey config for this tenant
+// GET PROJECT CONFIG
 // getAuth()
-//     .passkeyConfigManager()
-//     .createPasskeyConfig(tenantRequest, tenantId)
-//     .then(
-//         (createdPasskeys) =>
-//             console.log(JSON.stringify(createdPasskeys))
-//     );
-
-// //2. Get Tenant
-// getAuth()
-//     .passkeyConfigManager()
-//     .getPasskeyConfig(tenantId)
-//     .then(
-//         (passkeyConfig) =>
-//             console.log(JSON.stringify(passkeyConfig))
-//     );
-
-
-// //3. Update Tenant
-// const updateTenantRequest = {
-//     expectedOrigins: undefined,
-// };
-// getAuth()
-//     .passkeyConfigManager()
-//     .updatePasskeyConfig(updateTenantRequest, tenantId)
-//     .then(
-//         (updatedConfig) =>
-//             console.log(JSON.stringify(updatedConfig))
-//     );
-
-
-//PROJECT CONFIG MANAGEMENT
-
-// // 4. Create Passkey Config - cannot be reversed
-// const createPasskeyConfigRequest = {
-//     rpId: "project-id.firebase.app",
-//     expectedOrigins: ["example1.com", "app1"],
-// };
-//
-// getAuth()
-//     .passkeyConfigManager()
-//     .createPasskeyConfig(createPasskeyConfigRequest)
-//     .then(
-//         (updateProjectConfigResult) => {
-//             console.log(JSON.stringify(updateProjectConfigResult));
-//         }
-//     );
-
-// // 5. Get Passkey Project Config
-// getAuth()
-//     .passkeyConfigManager()
-//     .getPasskeyConfig()
+//     .projectConfigManager()
+//     .getProjectConfig()
 //     .then(
 //         (projectConfigResult) => {
-//             console.log(JSON.stringify(projectConfigResult));
+//             console.log(JSON.stringify(projectConfigResult.recaptchaConfig, null, 2));
 //         }
 //     );
+    
 
-// // 6. Update Project's config
-// //Project Config update request - feel free to tweak these fields
-// const updatedPasskeyConfig = {
-//     rpId: 'rpId',
-//     expectedOrigins: ['app1', 'app12'],
-// };
-//
+//UPDATE PROJECT CONFIG
+// const recaptchaConfig  = {
+//     phoneEnforcementState: 'AUDIT',
+//     managedRules: [
+//         {
+//         endScore: 0.1,
+//         action: 'BLOCK',
+//         },
+//     ],
+//     useAccountDefender: true,
+//     useSmsBotScore: true,
+//     useSmsTollFraudProtection: false,
+//     smsTollFraudManagedRules: [
+//         {
+//         startScore: 0.8,
+//         action: 'BLOCK',
+//         },
+//     ],
+// }
+
+// getAuth().projectConfigManager().updateProjectConfig({
+//     recaptchaConfig,
+// }).then(
+//     (updateProjectConfigResult) => {
+//         console.log(JSON.stringify(updateProjectConfigResult.recaptchaConfig, null, 2));
+//     }
+// );
+
+// TENANT CONFIG 
+getAuth()
+    .tenantManager()
+    .createTenant({displayName: requestTenant.displayName})
+    .then(
+        (createdTenant) =>
+            console.log(JSON.stringify(createdTenant, null, 2))
+    );
+    
+    
+let tenantId = "some-tenantId"; // use the tenantId from the created tenant
+const recaptchaConfig = {
+    phoneEnforcementState: 'AUDIT',
+    managedRules: [
+        {
+        endScore: 0.1,
+        action: 'BLOCK',
+        },
+    ],
+    useAccountDefender: true,
+    useSmsBotScore: true,
+    useSmsTollFraudProtection: false,
+    smsTollFraudManagedRules: [
+        {
+        startScore: 0.8,
+        action: 'BLOCK',
+        },
+    ],
+};
+
+// UPDATE TENANT CONFIG
+getAuth()
+    .tenantManager()
+    .updateTenant(tenantId, {recaptchaConfig})
+    .then(
+        (updatedConfig) =>
+            console.log(JSON.stringify(updatedConfig, null, 2))
+    );
+
+// GET TENANT CONFIG
 // getAuth()
-//     .passkeyConfigManager()
-//     .updatePasskeyConfig(updatedPasskeyConfig)
+//     .tenantManager()
+//     .getTenant(tenantId)
 //     .then(
-//         (updateProjectConfigResult) => {
-//             console.log(JSON.stringify(updateProjectConfigResult));
+//         (getTenantResult) => {
+//             console.log(JSON.stringify(getTenantResult, null, 2));
 //         }
 //     );
-
-
-// //7. Get user info
-// getAuth().getUser(<UID>).then((user) => console.log(JSON.stringify(user.passkeyInfo)));
